@@ -123,6 +123,8 @@ button, .button, .filter, .icon-button, .site-header a { touch-action: manipulat
 .password-card label { display: grid; gap: 6px; min-width: 0; font-size: .88rem; font-weight: 700; }
 .password-card input { width: 100%; border: 1px solid #cad6dc; border-radius: 8px; padding: 12px; }
 .password-card .form-message { grid-column: 1 / -1; margin: 0; }
+.image-upload-label input[type="file"] { padding: 9px; background: #fff; cursor: pointer; }
+.image-upload-label small { color: var(--muted); font-weight: 500; line-height: 1.4; }
 
 .cart-summary { display: grid; gap: 9px; margin-bottom: 14px; }
 .cart-summary > div { display: flex; justify-content: space-between; align-items: center; color: var(--muted); }
