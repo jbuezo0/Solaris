@@ -81,7 +81,7 @@
 
     <section class="view" data-route="administrador" hidden>
       <div class="admin-shell">
-        <div class="admin-intro"><span class="eyebrow dark">ÁREA PRIVADA</span><h1>Administrador de productos</h1><p>Los cambios se guardan únicamente en este navegador.</p></div>
+        <div class="admin-intro"><span class="eyebrow dark">ÁREA PRIVADA</span><h1>Administrador de productos</h1><p>El catálogo se guarda de forma segura y se actualiza en todos los dispositivos.</p></div>
 
         <section class="auth-card" id="setupCard" hidden>
           <h2>Crear acceso de administrador</h2><p>Configura una contraseña para proteger el catálogo en este dispositivo.</p>
@@ -89,8 +89,8 @@
         </section>
 
         <section class="auth-card" id="loginCard" hidden>
-          <h2>Ingresar</h2><p>Escribe la contraseña creada en este dispositivo.</p>
-          <form id="loginForm"><label>Contraseña<input id="loginPassword" type="password" required autocomplete="current-password"></label><button class="button primary" type="submit">Entrar</button><p class="form-message" id="loginMessage"></p></form>
+          <h2>Ingresar</h2><p>Acceso exclusivo para el administrador de Solaris GT.</p>
+          <form id="loginForm"><label>Correo<input id="loginEmail" type="email" value="jbuezo0@gmail.com" readonly autocomplete="username"></label><label>Contraseña<input id="loginPassword" type="password" required autocomplete="current-password"></label><button class="button primary" type="submit">Entrar</button><p class="form-message" id="loginMessage"></p></form>
         </section>
 
         <section id="adminPanel" hidden>
@@ -143,6 +143,8 @@
     </div>
   </aside>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
   <script src="guatemala-locations.js"></script>
   <script src="app.js"></script>
 </body>
