@@ -116,6 +116,14 @@ button, .button, .filter, .icon-button, .site-header a { touch-action: manipulat
 
 :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
 
+.password-card { margin: 0 0 22px; border: 1px solid var(--line); border-radius: 12px; background: #fff; overflow: hidden; }
+.password-card summary { cursor: pointer; padding: 16px 20px; font-weight: 800; color: var(--navy); background: #f3f8f9; }
+.password-card form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)) auto; gap: 12px; align-items: end; padding: 20px; }
+.password-card form > p:first-child { grid-column: 1 / -1; margin: 0; color: var(--muted); }
+.password-card label { display: grid; gap: 6px; min-width: 0; font-size: .88rem; font-weight: 700; }
+.password-card input { width: 100%; border: 1px solid #cad6dc; border-radius: 8px; padding: 12px; }
+.password-card .form-message { grid-column: 1 / -1; margin: 0; }
+
 .cart-summary { display: grid; gap: 9px; margin-bottom: 14px; }
 .cart-summary > div { display: flex; justify-content: space-between; align-items: center; color: var(--muted); }
 .cart-summary strong { color: var(--ink); }
@@ -129,4 +137,8 @@ button, .button, .filter, .icon-button, .site-header a { touch-action: manipulat
 @media (max-width: 480px) {
   .location-fields { grid-template-columns: 1fr; }
   .cart-checkout select { font-size: 16px; }
+}
+
+@media (max-width: 900px) {
+  .password-card form { grid-template-columns: 1fr; }
 }

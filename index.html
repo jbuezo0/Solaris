@@ -95,6 +95,17 @@
 
         <section id="adminPanel" hidden>
           <div class="admin-toolbar"><div><b>Catálogo</b><span id="productCount"></span></div><button class="button dark-button" id="logoutButton">Cerrar sesión</button></div>
+          <details class="password-card">
+            <summary>Cambiar contraseña</summary>
+            <form id="changePasswordForm">
+              <p>La contraseña se actualizará directamente en Supabase.</p>
+              <label>Contraseña actual<input id="currentPassword" type="password" required autocomplete="current-password"></label>
+              <label>Contraseña nueva<input id="newPassword" type="password" minlength="8" required autocomplete="new-password"></label>
+              <label>Confirmar contraseña nueva<input id="confirmNewPassword" type="password" minlength="8" required autocomplete="new-password"></label>
+              <button class="button primary" type="submit">Actualizar contraseña</button>
+              <p class="form-message" id="changePasswordMessage" role="status"></p>
+            </form>
+          </details>
           <div class="admin-grid">
             <form class="product-form" id="productForm">
               <input type="hidden" id="productId">
