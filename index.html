@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Solaris GT: lámparas solares, iluminación y decoración en Esquipulas, Guatemala.">
+  <title>Solaris GT · Iluminación solar y decoración</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="cart.css">
+  <link rel="stylesheet" href="responsive.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Solaris GT, inicio">
+      <span class="brand-logo-wrap"><img class="brand-logo" src="assets/logo-solaris.png" alt="" aria-hidden="true"></span>
+    </a>
+    <button class="menu-button" id="menuButton" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <nav id="mainNav" aria-label="Navegación principal">
+      <a href="#inicio">Inicio</a>
+      <a href="#tienda">Tienda</a>
+      <a href="#contacto">Contacto</a>
+      <a href="#administrador" class="admin-link">Administrador</a>
+    </nav>
+    <button class="cart-button" id="cartButton" aria-label="Abrir carrito">Carrito <span id="cartCount">0</span></button>
+  </header>
+
+  <main>
+    <section class="view" data-route="inicio">
+      <div class="hero">
+        <img src="assets/hero-solaris.png" alt="Patio moderno iluminado con lámparas solares">
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+          <span class="eyebrow">SOLARIS GT · ESQUIPULAS</span>
+          <h1>Ilumina distinto.<br><em>Vive mejor.</em></h1>
+          <p>Lámparas solares, iluminación y piezas decorativas para transformar cada espacio.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#tienda">Ver productos</a>
+            <a class="button glass" href="https://wa.me/50252728320?text=Hola%20Solaris%20GT%2C%20deseo%20informaci%C3%B3n" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          </div>
+        </div>
+        <div class="hero-note"><span>☀</span><b>Energía solar</b><small>Iluminación práctica y sostenible</small></div>
+      </div>
+
+      <section class="promise">
+        <div><span>01</span><h2>Solar para exteriores</h2><p>Soluciones sencillas que aprovechan la energía del día para iluminar la noche.</p></div>
+        <div><span>02</span><h2>Decoración con intención</h2><p>Luz que crea ambiente y convierte rincones cotidianos en espacios especiales.</p></div>
+        <div><span>03</span><h2>Asesoría cercana</h2><p>Te ayudamos a elegir según tu espacio, estilo y necesidad de iluminación.</p></div>
+      </section>
+
+      <section class="featured-section">
+        <div class="section-heading"><span>SELECCIÓN INICIAL</span><h2>Ideas para iluminar tu espacio</h2><a href="#tienda">Ver catálogo completo →</a></div>
+        <div class="product-grid" id="featuredGrid"></div>
+      </section>
+    </section>
+
+    <section class="view" data-route="tienda" hidden>
+      <div class="page-head"><span class="eyebrow dark">CATÁLOGO</span><h1>Encuentra tu próxima luz</h1><p>Productos de demostración. Consulta disponibilidad y precio actualizado por WhatsApp.</p></div>
+      <div class="shop-tools">
+        <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar lámparas o decoración"></label>
+        <div class="filters" id="categoryFilters"></div>
+      </div>
+      <div class="product-grid shop-grid" id="shopGrid"></div>
+      <div class="empty-state" id="emptyState" hidden><b>No encontramos productos</b><span>Prueba con otra búsqueda o categoría.</span></div>
+    </section>
+
+    <section class="view" data-route="contacto" hidden>
+      <div class="contact-layout">
+        <div class="contact-copy">
+          <span class="eyebrow dark">CONTACTO</span>
+          <h1>Hablemos de tu espacio</h1>
+          <p>Cuéntanos qué deseas iluminar y te ayudaremos a encontrar una opción adecuada.</p>
+          <a class="button whatsapp" href="https://wa.me/50252728320?text=Hola%20Solaris%20GT%2C%20deseo%20una%20cotizaci%C3%B3n" target="_blank" rel="noopener">Escribir al +502 5272 8320</a>
+        </div>
+        <div class="contact-card">
+          <div><small>CORREO</small><a href="mailto:solarisgt@gmail.com">solarisgt@gmail.com</a></div>
+          <div><small>DIRECCIÓN</small><p>Esquipulas, zona 1<br>6.ª avenida, 4-51</p></div>
+          <div><small>ATENCIÓN</small><p>Solicita horarios y disponibilidad por WhatsApp.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" data-route="administrador" hidden>
+      <div class="admin-shell">
+        <div class="admin-intro"><span class="eyebrow dark">ÁREA PRIVADA</span><h1>Administrador de productos</h1><p>Los cambios se guardan únicamente en este navegador.</p></div>
+
+        <section class="auth-card" id="setupCard" hidden>
+          <h2>Crear acceso de administrador</h2><p>Configura una contraseña para proteger el catálogo en este dispositivo.</p>
+          <form id="setupForm"><label>Nueva contraseña<input id="setupPassword" type="password" minlength="6" required autocomplete="new-password"></label><label>Confirmar contraseña<input id="setupConfirm" type="password" minlength="6" required autocomplete="new-password"></label><button class="button primary" type="submit">Crear acceso</button><p class="form-message" id="setupMessage"></p></form>
+        </section>
+
+        <section class="auth-card" id="loginCard" hidden>
+          <h2>Ingresar</h2><p>Escribe la contraseña creada en este dispositivo.</p>
+          <form id="loginForm"><label>Contraseña<input id="loginPassword" type="password" required autocomplete="current-password"></label><button class="button primary" type="submit">Entrar</button><p class="form-message" id="loginMessage"></p></form>
+        </section>
+
+        <section id="adminPanel" hidden>
+          <div class="admin-toolbar"><div><b>Catálogo</b><span id="productCount"></span></div><button class="button dark-button" id="logoutButton">Cerrar sesión</button></div>
+          <div class="admin-grid">
+            <form class="product-form" id="productForm">
+              <input type="hidden" id="productId">
+              <h2 id="formTitle">Agregar producto</h2>
+              <label>Nombre<input id="productName" required></label>
+              <label>Categoría<select id="productCategory"><option>Lámparas solares</option><option>Decoración</option><option>Iluminación interior</option><option>Iluminación exterior</option></select></label>
+              <div class="form-row"><label>Precio (Q)<input id="productPrice" type="number" min="0" step="0.01" required></label><label>Estado<select id="productStatus"><option>Disponible</option><option>Por encargo</option><option>Agotado</option></select></label></div>
+              <label>Descripción<textarea id="productDescription" rows="4" required></textarea></label>
+              <label>Imagen (URL opcional)<input id="productImage" type="url" placeholder="https://..."></label>
+              <div class="form-actions"><button class="button primary" type="submit">Guardar producto</button><button class="button secondary" id="cancelEdit" type="button" hidden>Cancelar</button></div>
+            </form>
+            <div class="admin-products" id="adminProducts"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="brand footer-brand"><span class="brand-logo-wrap"><img class="brand-logo" src="assets/logo-solaris.png" alt="Logo de Solaris"></span></div><p>© <span id="year"></span> Solaris GT · Esquipulas, Guatemala</p><a href="#administrador">Administrar</a></footer>
+  <div class="cart-backdrop" id="cartBackdrop" hidden></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-label="Carrito de compras">
+    <div class="cart-head"><div><small>TU PEDIDO</small><h2>Carrito</h2></div><button id="closeCart" aria-label="Cerrar carrito">×</button></div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-empty" id="cartEmpty"><span>☀</span><b>Tu carrito está vacío</b><p>Agrega productos desde la tienda.</p></div>
+    <div class="cart-checkout" id="cartCheckout" hidden>
+      <div class="cart-summary">
+        <div><span>Productos</span><strong id="cartSubtotal">Q0.00</strong></div>
+        <div><span>Envío</span><strong id="cartShipping">Q35.00</strong></div>
+        <div class="cart-total"><span>Total estimado</span><strong id="cartTotal">Q0.00</strong></div>
+        <small id="shippingNotice">Envío gratis en compras desde Q800.</small>
+      </div>
+      <button class="button continue-shopping" id="continueShopping" type="button">← Seguir comprando</button>
+      <form id="checkoutForm">
+        <h3>Datos para el envío</h3>
+        <label>Nombre completo<input name="customerName" required autocomplete="name"></label>
+        <label>Número de teléfono<input name="customerPhone" type="tel" required autocomplete="tel"></label>
+        <div class="location-fields">
+          <label>Departamento<select name="customerDepartment" id="customerDepartment" required><option value="">Selecciona un departamento</option></select></label>
+          <label>Municipio<select name="customerMunicipality" id="customerMunicipality" required disabled><option value="">Primero selecciona un departamento</option></select></label>
+        </div>
+        <label>Dirección de envío<textarea name="customerAddress" rows="3" required autocomplete="street-address"></textarea></label>
+        <label>Indicaciones adicionales<textarea name="customerNotes" rows="2" placeholder="Opcional"></textarea></label>
+        <button class="button whatsapp checkout-button" type="submit">Enviar pedido por WhatsApp</button>
+        <small>No realizamos cobros en esta página. Confirmaremos disponibilidad, envío y forma de pago por WhatsApp.</small>
+      </form>
+    </div>
+  </aside>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="guatemala-locations.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
