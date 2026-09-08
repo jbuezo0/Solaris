@@ -16,3 +16,10 @@ El administrador solicita crear una contraseña la primera vez. Los productos y 
 - Repositorio previsto: `solarisgt`
 
 Los productos actuales son demostrativos y pueden reemplazarse desde el administrador.
+
+## Preparación de Supabase
+
+- `supabase-config.js` contiene únicamente la URL y la clave pública del proyecto.
+- `supabase-setup.sql` crea las tablas, el cálculo protegido de pedidos y las políticas RLS.
+- El administrador autorizado es `jbuezo0@gmail.com`.
+- Nunca deben guardarse aquí claves `sb_secret_` ni `service_role`.
