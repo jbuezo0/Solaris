@@ -6,15 +6,33 @@ create extension if not exists pgcrypto;
 create table if not exists public.products (
   id uuid primary key default gen_random_uuid(),
   name text not null check (char_length(name) between 1 and 160),
-  category text not null check (category in ('Lámparas solares','Decoración','Iluminación interior','Iluminación exterior')),
+  category text not null check (category in ('Lámparas solares','Decoración','Iluminación interior','Iluminación exterior','Guirnaldas y ambiente','Reflectores solares','Accesorios','Otros')),
+  brand text not null default '',
+  model text not null default '',
+  old_price numeric(12,2) check (old_price is null or old_price >= 0),
   price numeric(12,2) not null check (price >= 0),
-  status text not null default 'Disponible' check (status in ('Disponible','Por encargo','Agotado')),
+  label text not null default '',
+  status text not null default 'Disponible' check (status in ('Disponible','Últimas unidades','Consultar existencias','Por encargo','Agotado')),
+  warranty text not null default 'Consultar',
   description text not null default '',
   image_url text not null default '',
   active boolean not null default true,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
+-- Actualización segura para proyectos Solaris creados con la primera versión.
+alter table public.products add column if not exists brand text not null default '';
+alter table public.products add column if not exists model text not null default '';
+alter table public.products add column if not exists old_price numeric(12,2);
+alter table public.products add column if not exists label text not null default '';
+alter table public.products add column if not exists warranty text not null default 'Consultar';
+alter table public.products drop constraint if exists products_category_check;
+alter table public.products add constraint products_category_check check (category in ('Lámparas solares','Decoración','Iluminación interior','Iluminación exterior','Guirnaldas y ambiente','Reflectores solares','Accesorios','Otros'));
+alter table public.products drop constraint if exists products_status_check;
+alter table public.products add constraint products_status_check check (status in ('Disponible','Últimas unidades','Consultar existencias','Por encargo','Agotado'));
+alter table public.products drop constraint if exists products_old_price_check;
+alter table public.products add constraint products_old_price_check check (old_price is null or old_price >= 0);
 
 create table if not exists public.orders (
   id uuid primary key default gen_random_uuid(),

@@ -17,6 +17,13 @@ El administrador solicita crear una contraseña la primera vez. Los productos y 
 
 Los productos actuales son demostrativos y pueden reemplazarse desde el administrador.
 
+## Catálogo ampliado y cuentas
+
+- La tienda incluye búsqueda, categorías, ordenamiento por precio o nombre y diseño responsivo.
+- Los clientes pueden registrarse, iniciar sesión y solicitar recuperación de contraseña desde `Mi cuenta`.
+- El administrador puede guardar marca, modelo, precio anterior, precio actual, etiqueta, disponibilidad y garantía.
+- En un proyecto Supabase creado con la primera versión, ejecute `MIGRACION_CATALOGO_Y_CUENTAS.sql` una sola vez desde **SQL Editor** antes de guardar productos con los campos nuevos.
+
 ## Preparación de Supabase
 
 - `supabase-config.js` contiene únicamente la URL y la clave pública del proyecto.

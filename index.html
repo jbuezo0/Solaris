@@ -19,6 +19,7 @@
       <a href="#inicio">Inicio</a>
       <a href="#tienda">Tienda</a>
       <a href="#contacto">Contacto</a>
+      <a href="#cuenta">Mi cuenta</a>
       <a href="#administrador" class="admin-link">Administrador</a>
     </nav>
     <button class="cart-button" id="cartButton" aria-label="Abrir carrito">Carrito <span id="cartCount">0</span></button>
@@ -58,9 +59,47 @@
       <div class="shop-tools">
         <label class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar lámparas o decoración"></label>
         <div class="filters" id="categoryFilters"></div>
+        <label class="sort-control">Ordenar<select id="sortSelect"><option value="featured">Relevancia</option><option value="price-asc">Precio: menor a mayor</option><option value="price-desc">Precio: mayor a menor</option><option value="name">Nombre</option></select></label>
       </div>
+      <p class="results-count" id="resultsCount" aria-live="polite"></p>
       <div class="product-grid shop-grid" id="shopGrid"></div>
       <div class="empty-state" id="emptyState" hidden><b>No encontramos productos</b><span>Prueba con otra búsqueda o categoría.</span></div>
+    </section>
+
+    <section class="view" data-route="cuenta" hidden>
+      <div class="account-shell">
+        <div class="account-intro">
+          <span class="eyebrow dark">CUENTA SOLARIS</span>
+          <h1>Tu acceso a Solaris</h1>
+          <p>Crea una cuenta o inicia sesión para identificarte de forma segura desde cualquier dispositivo.</p>
+          <ul><li>✓ Acceso seguro con Supabase</li><li>✓ Recuperación de contraseña</li><li>✓ Una sola cuenta para tus dispositivos</li></ul>
+        </div>
+        <section class="account-card" id="customerAuthCard">
+          <div id="customerAuthLoading">Verificando tu sesión…</div>
+          <div id="customerLoggedOut" hidden>
+            <h2 id="customerAuthTitle">Iniciar sesión</h2>
+            <div class="auth-tabs" role="tablist" aria-label="Acceso por correo">
+              <button type="button" class="active" data-auth-mode="login">Ingresar</button>
+              <button type="button" data-auth-mode="signup">Crear cuenta</button>
+            </div>
+            <form id="customerAuthForm">
+              <label id="customerNameField" hidden>Nombre completo<input id="customerAccountName" autocomplete="name" maxlength="100"></label>
+              <label>Correo electrónico<input id="customerAccountEmail" type="email" autocomplete="email" required></label>
+              <label>Contraseña<input id="customerAccountPassword" type="password" minlength="8" autocomplete="current-password" required></label>
+              <button class="button primary" id="customerAuthSubmit" type="submit">Ingresar</button>
+              <button class="auth-link" id="resetPasswordButton" type="button">¿Olvidaste tu contraseña?</button>
+              <p class="form-message" id="customerAuthMessage" role="status"></p>
+            </form>
+          </div>
+          <div id="customerLoggedIn" hidden>
+            <div class="account-avatar" id="customerInitial">S</div>
+            <span class="eyebrow dark">SESIÓN ACTIVA</span>
+            <h2 id="customerDisplayName">Bienvenido</h2>
+            <p id="customerDisplayEmail"></p>
+            <div class="form-actions"><a class="button primary" href="#tienda">Ir a la tienda</a><button class="button secondary" id="customerLogoutButton" type="button">Cerrar sesión</button></div>
+          </div>
+        </section>
+      </div>
     </section>
 
     <section class="view" data-route="contacto" hidden>
@@ -111,8 +150,11 @@
               <input type="hidden" id="productId">
               <h2 id="formTitle">Agregar producto</h2>
               <label>Nombre<input id="productName" required></label>
-              <label>Categoría<select id="productCategory"><option>Lámparas solares</option><option>Decoración</option><option>Iluminación interior</option><option>Iluminación exterior</option></select></label>
-              <div class="form-row"><label>Precio (Q)<input id="productPrice" type="number" min="0" step="0.01" required></label><label>Estado<select id="productStatus"><option>Disponible</option><option>Por encargo</option><option>Agotado</option></select></label></div>
+              <div class="form-row"><label>Marca<input id="productBrand" maxlength="80" placeholder="Ej. Solaris"></label><label>Modelo<input id="productModel" maxlength="80" placeholder="Opcional"></label></div>
+              <label>Categoría<select id="productCategory"><option>Lámparas solares</option><option>Decoración</option><option>Iluminación interior</option><option>Iluminación exterior</option><option>Guirnaldas y ambiente</option><option>Reflectores solares</option><option>Accesorios</option><option>Otros</option></select></label>
+              <div class="form-row"><label>Precio anterior (Q)<input id="productOldPrice" type="number" min="0" step="0.01" placeholder="Opcional"></label><label>Precio actual (Q)<input id="productPrice" type="number" min="0" step="0.01" required></label></div>
+              <div class="form-row"><label>Etiqueta<select id="productLabel"><option value="">Sin etiqueta</option><option>Oferta</option><option>Nuevo</option><option>Recomendado</option><option>Últimas unidades</option></select></label><label>Disponibilidad<select id="productStatus"><option>Disponible</option><option>Últimas unidades</option><option>Consultar existencias</option><option>Por encargo</option><option>Agotado</option></select></label></div>
+              <label>Garantía<select id="productWarranty"><option>Sin garantía</option><option>3 meses</option><option>6 meses</option><option selected>1 año</option><option>2 años</option><option>3 años</option><option>5 años</option><option>Consultar</option></select></label>
               <label>Descripción<textarea id="productDescription" rows="4" required></textarea></label>
               <label class="image-upload-label">Subir imagen
                 <input id="productImageFile" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
