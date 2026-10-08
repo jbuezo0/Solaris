@@ -10,19 +10,14 @@
   <link rel="stylesheet" href="responsive.css">
 </head>
 <body>
+  <div class="topbar">☀ Envíos a todo el país · Atención personalizada · Productos con garantía</div>
   <header class="site-header">
-    <a class="brand" href="#inicio" aria-label="Solaris GT, inicio">
-      <span class="brand-logo-wrap"><img class="brand-logo" src="assets/logo-solaris.png" alt="" aria-hidden="true"></span>
-    </a>
+    <a class="brand" href="#inicio" aria-label="Solaris GT, inicio"><span class="brand-logo-wrap"><img class="brand-logo" src="assets/logo-solaris.png" alt="Logo de Solaris GT"></span></a>
     <button class="menu-button" id="menuButton" aria-label="Abrir menú" aria-expanded="false">☰</button>
     <nav id="mainNav" aria-label="Navegación principal">
-      <a href="#inicio">Inicio</a>
-      <a href="#tienda">Tienda</a>
-      <a href="#contacto">Contacto</a>
-      <a href="#cuenta">Mi cuenta</a>
-      <a href="#administrador" class="admin-link">Administrador</a>
+      <a href="#inicio">Inicio</a><a href="#tienda">Tienda</a><a href="#contacto">Contacto</a><a href="#administrador" class="admin-link">Administrador</a>
     </nav>
-    <button class="cart-button" id="cartButton" aria-label="Abrir carrito">Carrito <span id="cartCount">0</span></button>
+    <div class="nav-actions"><a class="account-button" href="#cuenta" aria-label="Mi cuenta">👤 <span>Mi cuenta</span></a><button class="cart-button" id="cartButton" aria-label="Abrir carrito">🛒 <span class="cart-label">Carrito</span> <b id="cartCount">0</b></button></div>
   </header>
 
   <main>
@@ -78,6 +73,9 @@
           <div id="customerAuthLoading">Verificando tu sesión…</div>
           <div id="customerLoggedOut" hidden>
             <h2 id="customerAuthTitle">Iniciar sesión</h2>
+            <p class="account-muted">Elige la opción que prefieras.</p>
+            <div class="social-login-grid"><button class="social-login google" type="button" data-oauth="google"><span class="social-icon">G</span> Continuar con Google</button><button class="social-login facebook" type="button" data-oauth="facebook"><span class="social-icon">f</span> Continuar con Facebook</button></div>
+            <div class="auth-divider"><span>o usa tu correo</span></div>
             <div class="auth-tabs" role="tablist" aria-label="Acceso por correo">
               <button type="button" class="active" data-auth-mode="login">Ingresar</button>
               <button type="button" data-auth-mode="signup">Crear cuenta</button>
@@ -156,10 +154,11 @@
               <div class="form-row"><label>Etiqueta<select id="productLabel"><option value="">Sin etiqueta</option><option>Oferta</option><option>Nuevo</option><option>Recomendado</option><option>Últimas unidades</option></select></label><label>Disponibilidad<select id="productStatus"><option>Disponible</option><option>Últimas unidades</option><option>Consultar existencias</option><option>Por encargo</option><option>Agotado</option></select></label></div>
               <label>Garantía<select id="productWarranty"><option>Sin garantía</option><option>3 meses</option><option>6 meses</option><option selected>1 año</option><option>2 años</option><option>3 años</option><option>5 años</option><option>Consultar</option></select></label>
               <label>Descripción<textarea id="productDescription" rows="4" required></textarea></label>
-              <label class="image-upload-label">Subir imagen
-                <input id="productImageFile" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
-                <small>JPG, PNG, WebP o GIF. Máximo 5 MB.</small>
+              <label class="image-upload-label">Subir imágenes
+                <input id="productImageFile" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
+                <small>Puedes seleccionar varias imágenes. Máximo 5 MB por archivo.</small>
               </label>
+              <div class="multi-image-preview" id="productImagePreview"><span>Las imágenes seleccionadas aparecerán aquí.</span></div>
               <label>O usar una URL de imagen<input id="productImage" type="url" placeholder="https://..."></label>
               <div class="form-actions"><button class="button primary" type="submit">Guardar producto</button><button class="button secondary" id="cancelEdit" type="button" hidden>Cancelar</button></div>
             </form>

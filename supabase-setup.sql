@@ -16,6 +16,7 @@ create table if not exists public.products (
   warranty text not null default 'Consultar',
   description text not null default '',
   image_url text not null default '',
+  image_urls jsonb not null default '[]'::jsonb,
   active boolean not null default true,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -27,6 +28,7 @@ alter table public.products add column if not exists model text not null default
 alter table public.products add column if not exists old_price numeric(12,2);
 alter table public.products add column if not exists label text not null default '';
 alter table public.products add column if not exists warranty text not null default 'Consultar';
+alter table public.products add column if not exists image_urls jsonb not null default '[]'::jsonb;
 alter table public.products drop constraint if exists products_category_check;
 alter table public.products add constraint products_category_check check (category in ('Lámparas solares','Decoración','Iluminación interior','Iluminación exterior','Guirnaldas y ambiente','Reflectores solares','Accesorios','Otros'));
 alter table public.products drop constraint if exists products_status_check;

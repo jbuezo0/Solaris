@@ -23,6 +23,8 @@ Los productos actuales son demostrativos y pueden reemplazarse desde el administ
 - Los clientes pueden registrarse, iniciar sesión y solicitar recuperación de contraseña desde `Mi cuenta`.
 - El administrador puede guardar marca, modelo, precio anterior, precio actual, etiqueta, disponibilidad y garantía.
 - En un proyecto Supabase creado con la primera versión, ejecute `MIGRACION_CATALOGO_Y_CUENTAS.sql` una sola vez desde **SQL Editor** antes de guardar productos con los campos nuevos.
+- Para varias imágenes por producto, ejecute una sola vez `MIGRACION_VARIAS_IMAGENES.sql` en **SQL Editor**.
+- El acceso con Google y Facebook requiere activar ambos proveedores en **Supabase > Authentication > Providers** y agregar `https://jbuezo0.github.io/Solaris/` en **Authentication > URL Configuration > Redirect URLs**.
 
 ## Preparación de Supabase
 
