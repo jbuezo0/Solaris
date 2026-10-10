@@ -12,7 +12,7 @@ El administrador solicita crear una contraseña la primera vez. Los productos y 
 
 - WhatsApp: +502 5272 8320
 - Correo: solarisgt@gmail.com
-- Dirección: Esquipulas, zona 1, 6.ª avenida, 4-51
+- Dirección: Esquipulas, zona 1, 6.ª avenida, 4-59
 - Repositorio previsto: `solarisgt`
 
 Los productos actuales son demostrativos y pueden reemplazarse desde el administrador.
