@@ -18,7 +18,42 @@
           "503": {"description": "Falta configurar la clave privada"}
         }
       }
+    },
+    "/solaris-chatgpt-fotos/draft": {
+      "post": {
+        "operationId": "prepareSolarisProduct",
+        "summary": "Guardar borrador de producto con fotos y datos",
+        "description": "Guarda un producto NO publicado. Usa URLs reales devueltas por uploadSolarisProductPhotos. Muestra la vista previa completa y pide aprobación antes de publishSolarisProduct. Repetir los mismos datos no duplica el producto.",
+        "x-openai-isConsequential": true,
+        "security": [{"uploadKey": []}],
+        "requestBody": {"required": true,"content": {"application/json": {"schema": {
+          "type": "object", "additionalProperties": false,
+          "required": ["name","category","price","status","description","image_urls"],
+          "properties": {
+            "name": {"type":"string","maxLength":160},
+            "category": {"type":"string","enum":["Lámparas solares","Decoración","Iluminación interior","Iluminación exterior","Guirnaldas y ambiente","Reflectores solares","Accesorios","Otros"]},
+            "price": {"type":"number","minimum":0,"maximum":9999999,"description":"Precio confirmado por el usuario en quetzales, hasta dos decimales"},
+            "status": {"type":"string","enum":["Disponible","Últimas unidades","Consultar existencias","Por encargo","Agotado"]},
+            "description": {"type":"string","maxLength":4000,"description":"Texto revisado, sin especificaciones inventadas"},
+            "brand": {"type":"string","maxLength":100},
+            "model": {"type":"string","maxLength":100},
+            "image_urls": {"type":"array","minItems":1,"maxItems":10,"items":{"type":"string"},"description":"URLs exactas obtenidas de la acción de carga"}
+          }
+        }}}},
+        "responses": {"200":{"description":"Borrador y vista previa para aprobación","content":{"application/json":{"schema":{"type":"object","properties":{"product":{"type":"object","additionalProperties":true},"published":{"type":"boolean"},"preview_token":{"type":"string"},"expires":{"type":"number"},"message":{"type":"string"}}}}}},"400":{"description":"Datos inválidos"},"401":{"description":"No autorizado"}}
+      }
+    },
+    "/solaris-chatgpt-fotos/publish": {
+      "post": {
+        "operationId":"publishSolarisProduct",
+        "summary":"Publicar borrador aprobado en Solaris",
+        "description":"SOLO después de mostrar nombre, precio, descripción, categoría, disponibilidad y fotos y recibir aprobación explícita. Usa product_id, preview_token y expires EXACTOS de prepareSolarisProduct, nunca inventados. Publica al catálogo visible para clientes.",
+        "x-openai-isConsequential":true,
+        "security":[{"uploadKey":[]}],
+        "requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","additionalProperties":false,"required":["product_id","preview_token","expires","confirmed"],"properties":{"product_id":{"type":"string"},"preview_token":{"type":"string"},"expires":{"type":"number"},"confirmed":{"type":"boolean","enum":[true],"description":"Solo true tras aprobación explícita del propietario"}}}}}},
+        "responses":{"200":{"description":"Publicación verificada","content":{"application/json":{"schema":{"type":"object","properties":{"published":{"type":"boolean"},"url":{"type":"string"},"product":{"type":"object","additionalProperties":true}}}}}},"400":{"description":"Falta aprobación o el borrador cambió"},"401":{"description":"No autorizado"},"404":{"description":"No encontrado"}}
+      }
     }
   },
-  "components": {"securitySchemes": {"uploadKey": {"type": "http", "scheme": "bearer"}}}
+  "components": {"schemas": {}, "securitySchemes": {"uploadKey": {"type": "http", "scheme": "bearer"}}}
 }
