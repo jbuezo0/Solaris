@@ -19,6 +19,30 @@
         }
       }
     },
+    "/solaris-chatgpt-fotos/create": {
+      "post": {
+        "operationId":"createAndPublishSolarisProduct",
+        "summary":"Crear y publicar producto directamente en Solaris",
+        "description":"Para un pedido explícito de subir/publicar un producto con sus fotos y datos. Guarda y publica en el mismo proceso sin esperar otro pedido de confirmación. No usar para pruebas ni cuando el usuario diga no publicar. Reintentos idénticos no duplican el producto.",
+        "x-openai-isConsequential":true,
+        "security":[{"uploadKey":[]}],
+        "requestBody":{"required":true,"content":{"application/json":{"schema":{
+          "type":"object","additionalProperties":false,
+          "required":["name","category","price","status","description","image_urls","confirmed"],
+          "properties":{
+            "name":{"type":"string","maxLength":160},
+            "category":{"type":"string","enum":["Lámparas solares","Decoración","Iluminación interior","Iluminación exterior","Guirnaldas y ambiente","Reflectores solares","Accesorios","Otros"]},
+            "price":{"type":"number","minimum":0,"maximum":9999999,"description":"Precio confirmado en quetzales, hasta dos decimales"},
+            "status":{"type":"string","enum":["Disponible","Últimas unidades","Consultar existencias","Por encargo","Agotado"]},
+            "description":{"type":"string","maxLength":4000},
+            "brand":{"type":"string","maxLength":100},"model":{"type":"string","maxLength":100},
+            "image_urls":{"type":"array","minItems":1,"maxItems":10,"items":{"type":"string"},"description":"URLs exactas devueltas por uploadSolarisProductPhotos"},
+            "confirmed":{"type":"boolean","enum":[true],"description":"El propietario pidió publicar este producto, no solo probar la carga"}
+          }
+        }}}},
+        "responses":{"200":{"description":"Producto publicado","content":{"application/json":{"schema":{"type":"object","properties":{"published":{"type":"boolean"},"url":{"type":"string"},"product":{"type":"object","additionalProperties":true}}}}}},"400":{"description":"Datos inválidos o falta solicitud de publicar"},"401":{"description":"No autorizado"}}
+      }
+    },
     "/solaris-chatgpt-fotos/draft": {
       "post": {
         "operationId": "prepareSolarisProduct",

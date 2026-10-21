@@ -50,5 +50,12 @@ test('draft -> explicit confirmation -> publish; retries do not duplicate',async
     const published=await (await productAction('publish',confirmation,base,'mock-service',key)).json();
     assert.equal(published.published,true);assert.equal(updates,1);
     assert.equal((await (await productAction('publish',confirmation,base,'mock-service',key)).json()).published,true);assert.equal(updates,1);
+    product=null;inserts=0;updates=0;
+    await assert.rejects(()=>productAction('create',input,base,'mock-service',key));
+    assert.equal(inserts,0);
+    const direct=await (await productAction('create',{...input,confirmed:true},base,'mock-service',key)).json();
+    assert.equal(direct.published,true);assert.equal(inserts,1);assert.equal(updates,1);
+    const retry=await (await productAction('create',{...input,confirmed:true},base,'mock-service',key)).json();
+    assert.equal(retry.published,true);assert.equal(inserts,1);assert.equal(updates,1);
   } finally {globalThis.fetch=original;}
 });

@@ -13,6 +13,8 @@ La función `solaris-chatgpt-fotos` carga fotos, prepara borradores ocultos y pu
 
 ## Borradores y publicación
 
+Publicación directa: `/create` recibe los datos y las URLs de fotos cargadas, exige `confirmed=true` y realiza la preparación y publicación en una sola solicitud. Es la acción `createAndPublishSolarisProduct`, usada cuando el propietario pide publicar ese producto. Los pedidos de prueba o solo borrador siguen sin publicarse. El GPT debe actualizar su esquema e instrucciones para ver esta cuarta acción. El diálogo de autorización de ChatGPT se conserva.
+
 `/draft` valida las imágenes existentes del almacenamiento de Solaris y guarda `active=false`. Los mismos datos producen un identificador estable y no crean duplicados al reintentar. Los cambios generan otro borrador; el anterior permanece oculto, no se borra automáticamente.
 
 `/publish` exige aprobación explícita (`confirmed=true`) y una firma de la vista previa, válida por 24 horas. La firma cubre todos los datos mostrados. Si el producto cambió, exige nueva vista previa. Una actualización concurrente detectada impide publicar datos distintos. La acción está marcada como consecuencial para que ChatGPT solicite autorización. La interfaz y las instrucciones del GPT deben mostrar la vista previa; el servidor no puede comprobar por sí solo las palabras del usuario.

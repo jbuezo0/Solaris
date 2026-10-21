@@ -57,6 +57,13 @@ async function previewToken(product,expires,key) {
   return Array.from(new Uint8Array(signed),x=>x.toString(16).padStart(2,'0')).join('');
 }
 export async function productAction(action,body,base,service,key) {
+  if(action==='create') {
+    if(body.confirmed!==true)throw new Error('Indica que deseas publicar este producto');
+    const draftResponse=await productAction('draft',body,base,service,key);
+    if(!draftResponse.ok)return draftResponse;
+    const draft=await draftResponse.json();
+    return productAction('publish',{product_id:draft.product.id,preview_token:draft.preview_token,expires:draft.expires,confirmed:true},base,service,key);
+  }
   const headers={Authorization:`Bearer ${service}`,apikey:service,'Content-Type':'application/json'};
   const fields='id,name,category,price,status,description,brand,model,image_url,image_urls,active,updated_at';
   const read=async id=>{const res=await fetch(`${base}/rest/v1/products?id=eq.${id}&select=${fields}`,{headers,signal:AbortSignal.timeout(10000)});if(!res.ok)throw new Error('No se pudo consultar el producto');return (await res.json())[0];};
@@ -93,7 +100,7 @@ export async function handler(req) {
     const raw=new TextDecoder().decode(await limitedBody(req,32768));
     const body=JSON.parse(raw);
     const route=new URL(req.url).pathname.split('/').filter(Boolean).pop();
-    if(route==='draft'||route==='publish') return await productAction(route,body,base,service,key);
+    if(route==='draft'||route==='publish'||route==='create') return await productAction(route,body,base,service,key);
     if(route!=='solaris-chatgpt-fotos')return reply(404,{error:'Operación no disponible'});
     const refs=body.openaiFileIdRefs;
     if(!Array.isArray(refs) || refs.length<1 || refs.length>5) return reply(400,{error:'Envía entre 1 y 5 fotografías'});
