@@ -100,6 +100,20 @@
       </div>
     </section>
 
+    <section class="view" data-route="recuperar" hidden>
+      <div class="account-shell">
+        <div class="account-intro"><span class="eyebrow dark">ACCESO SEGURO</span><h1>Crea tu nueva contraseña</h1><p>No necesitas recordar la contraseña anterior. Usa una nueva que no hayas compartido.</p></div>
+        <section class="account-card">
+          <form id="recoveryForm">
+            <label>Nueva contraseña<input id="recoveryPassword" type="password" minlength="8" autocomplete="new-password" required></label>
+            <label>Confirmar nueva contraseña<input id="recoveryConfirm" type="password" minlength="8" autocomplete="new-password" required></label>
+            <button class="button primary" id="recoverySubmit" type="submit" disabled>Guardar contraseña</button>
+            <p class="form-message" id="recoveryMessage" role="status">Abre el enlace de recuperación enviado a tu correo.</p>
+            <a class="auth-link" href="#cuenta">Volver a Mi cuenta / solicitar otro enlace</a>
+          </form>
+        </section>
+      </div>
+    </section>
     <section class="view" data-route="contacto" hidden>
       <div class="contact-layout">
         <div class="contact-copy">
@@ -199,9 +213,11 @@
     </div>
   </aside>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="recovery.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
   <script src="guatemala-locations.js"></script>
   <script src="app.js"></script>
+  <script>if(supabaseClient)window.initializeSolarisRecovery(supabaseClient);</script>
 </body>
 </html>
